@@ -4,6 +4,7 @@ import os
 import numpy as np
 from natsort import natsorted
 
+from pprint import pprint
 
 def search_for_ext(rootdir, extension = 'tif', look_one_level_down=False):
     filepaths = []
@@ -80,7 +81,9 @@ def list_files(froot, look_one_level_down, exts):
         first_tiffs = np.zeros(0, np.bool)
     lfs = len(fs)
     if look_one_level_down:
-        fdir = glob.glob(os.path.join(froot, "*/"))
+        fdir = natsorted(glob.glob(os.path.join(froot, "*/")))
+        print("Looking for tiff files in:")
+        pprint(fdir)
         for folder_down in fdir:
             fsnew = []
             for e in exts:
